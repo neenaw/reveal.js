@@ -63,13 +63,23 @@
                     },
                     responsive: true,
                     scales: {
-                        scaleLabel: {
-                            fontSize: 30
-                        },
                         xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                //fontSize: 30
+                                labelString: 'Percentage',
+                                fontSize: 30
+                            },
                             stacked: true,
                         }],
                         yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                //fontSize: 30
+                                //labelString: 'Month',
+                                //labelString: ["January", "February"],
+                                fontSize: 30
+                            },
                             stacked: true
                         }]
                     }
