@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <!-- <link href="node_modules/c3/css/c3.css" rel="stylesheet" type="text/css"> -->
+  </head>
+  <body>
+    <div id="chart"></div>
+
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="node_modules/c3/c3.js"></script>
+    <script>
+      var chart = c3.generate({
+        data: {
+          columns: [
+            ['data1', 30, 20],
+            ['data2', 20, 30]
+          ],
+          type: 'bar',
+          groups: [
+            ['data1', 'data2']
+          ]
+        },
+        axis: {
+          x: {
+          label: {
+            text: 'Your X Axis',
+            position: 'outer-center'
+            }
+          },
+          rotated: true
+        },
+        bar: {
+          zerobased: false
+        }
+      });
+    </script>
+  </body>
+</html>

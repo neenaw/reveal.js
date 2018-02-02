@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Stacked Bar Chart</title>
+    <script src="plugin/chart/Chart.bundle.min.js"></script>
+    <script src="plugin/chart/utils.js"></script>
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div >
+        <canvas id="canvas"></canvas>
+    </div>
+    <button id="randomizeData">Randomize Data</button>
+    <script>
+        var barChartData = {
+            labels: ["January", "February"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: window.chartColors.red,
+                stack: 'Stack 0',
+                data: [12, 19],
+
+            }, {
+                label: 'Dataset 2',
+                backgroundColor: window.chartColors.blue,
+                stack: 'Stack 0',
+                data: [3, 5],
+            }, {
+                label: 'Dataset 3',
+                backgroundColor: window.chartColors.green,
+                stack: 'Stack 1',
+                data: [2, 3],
+            }]
+
+        };
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: barChartData,
+                options: {
+                    legend: {
+                        labels: {
+                            fontSize: 30
+                        }
+                    },
+                    title:{
+                        display:true,
+                        text:"Chart.js Bar Chart - Stacked",
+                            fontSize: 30
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    responsive: true,
+                    scales: {
+                        scaleLabel: {
+                            fontSize: 30
+                        },
+                        xAxes: [{
+                            stacked: true,
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+
+
+                }
+            });
+        };
+
+        document.getElementById('randomizeData').addEventListener('click', function() {
+            barChartData.datasets.forEach(function(dataset, i) {
+                dataset.data = dataset.data.map(function() {
+                    return randomScalingFactor();
+                });
+            });
+            window.myBar.update();
+        });
+    </script>
+</body>
+
+</html>
