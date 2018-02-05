@@ -15,88 +15,153 @@
 </head>
 
 <body>
-    <div >
+    <div id="container" style="width: 80%;">
         <canvas id="canvas"></canvas>
     </div>
-    <button id="randomizeData">Randomize Data</button>
+    <button id="mostLikely17">Fall 2017 - Most Likely</button>
+    <button id="likely17">Fall 2017 - Likely</button>
+    <button id="mostLikely14">Fall 2014 - Most Likely </button>
+    <button id="likely14">Fall 2014 - Likley</button>
+    <button id="removeData">Remove</button>
     <script>
+        Chart.defaults.global.defaultFontColor = "Helvetica, sans-serif";
+    //document.getElementById('addDataset17').addEventListener('click', function() {
         var barChartData = {
-            labels: ["January", "February"],
-            datasets: [{
-                label: 'Dataset 1',
-                backgroundColor: window.chartColors.red,
-                stack: 'Stack 0',
-                data: [12, 19],
-
-            }, {
-                label: 'Dataset 2',
-                backgroundColor: window.chartColors.blue,
-                stack: 'Stack 0',
-                data: [3, 5],
-            }, {
-                label: 'Dataset 3',
-                backgroundColor: window.chartColors.green,
-                stack: 'Stack 1',
-                data: [2, 3],
-            }]
-
+            labels: ["Start My Research", "Database List","Google", "Skyline Catalog", "Journal List", "Research Guide", "Search Course Reserve", ],
+            data: []
         };
-        window.onload = function() {
-            var ctx = document.getElementById("canvas").getContext("2d");
-            window.myBar = new Chart(ctx, {
-                type: 'horizontalBar',
-                data: barChartData,
-                options: {
-                    legend: {
-                        labels: {
-                            fontSize: 30
+
+    window.onload = function() {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myBar = new Chart(ctx, {
+            labels: ["Start My Research", "Database List","Google", "Skyline Catalog", "Journal List", "Research Guide", "Search Course Reserve", ],
+            type: 'horizontalBar',
+            data: barChartData,
+            //barPercentage: 0.9,
+            options: {
+                elements: {
+                        rectangle: {
+                            borderWidth: 2,
                         }
                     },
-                    title:{
-                        display:true,
-                        text:"Chart.js Bar Chart - Stacked",
-                            fontSize: 30
-                    },
-                    tooltips: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    responsive: true,
-                    scales: {
-                        xAxes: [{
-                            scaleLabel: {
-                                display: true,
-                                //fontSize: 30
-                                labelString: 'Percentage',
-                                fontSize: 30
-                            },
-                            stacked: true,
-                        }],
-                        yAxes: [{
-                            scaleLabel: {
-                                display: true,
-                                //fontSize: 30
-                                //labelString: 'Month',
-                                //labelString: ["January", "February"],
-                                fontSize: 30
-                            },
-                            stacked: true
-                        }]
+                legend: {
+                    labels: {
+                        fontSize: 30
                     }
-
-
+                },
+                title:{
+                    display:false
+                    // text:"How likely are you to use the following to START Your Research online?"
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            //fontSize: 30
+                            labelString: 'Percentage',
+                            fontSize: 30,
+                            beginAtZero: true
+                        },
+                        stacked: true,
+                        ticks: {
+                            fontSize: 40,
+                            beginAtZero: true,
+                            steps: 10,
+                            stepValue: 5,
+                            max: 100
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            //fontSize: 30
+                            //labelString: 'Month',
+                            //labelString: ["January", "February"],
+                            fontSize: 30
+                        },
+                        ticks:{
+                            fontSize: 40
+                        },
+                        stacked: true
+                    }]
                 }
-            });
-        };
 
-        document.getElementById('randomizeData').addEventListener('click', function() {
-            barChartData.datasets.forEach(function(dataset, i) {
-                dataset.data = dataset.data.map(function() {
-                    return randomScalingFactor();
-                });
-            });
+
+            }
+        });
+    };
+    document.getElementById('mostLikely17').addEventListener('click', function() {
+    
+        var dsColor = window.chartColors.green;
+        var Dataset171 = {
+            label: 'Most Likely 2017',
+            backgroundColor: window.chartColors.lightgreen,
+            stack: 'Stack 0',
+            borderWidth: 1,
+            data: [42,30,25,16,16,11,7,6],
+        }
+
+        barChartData.datasets.push(Dataset171);
+        window.myBar.update();
+    });
+    document.getElementById('likely17').addEventListener('click', function() {
+    
+        var dsColor = window.chartColors.grey;
+        var Dataset172 = {
+            label: 'Likely 2017',
+            backgroundColor: window.chartColors.green,
+            stack: 'Stack 0',
+            data: [22,36,19,26,27,26,17,9],
+        }
+
+        // for (var index = 0; index < barChartData.labels.length; ++index) {
+        //     newDataset.data.push(randomScalingFactor());
+        // }
+
+        barChartData.datasets.push(Dataset172);
+        window.myBar.update();
+    });
+    document.getElementById('mostLikely14').addEventListener('click', function() {
+    
+        var dsColor = window.chartColors.grey;
+        var Dataset141 = {
+            label: 'Most Likely 2014',
+            backgroundColor: window.chartColors.grey,
+            stack: 'Stack 1',
+            data: [18,34,42,23,17,10,9,8],
+        }
+
+        // for (var index = 0; index < barChartData.labels.length; ++index) {
+        //     newDataset.data.push(randomScalingFactor());
+        // }
+
+        barChartData.datasets.push(Dataset141);
+        window.myBar.update();
+    });
+    document.getElementById('likely14').addEventListener('click', function() {
+    
+        var dsColor = window.chartColors.grey;
+        var Dataset142 = {
+            label: 'Likely 2014',
+            backgroundColor: window.chartColors.black,
+            stack: 'Stack 1',
+            data: [25,32,32,36,39,31,21,15],
+        }
+
+        barChartData.datasets.push(Dataset142);
+        window.myBar.update();
+    });
+
+    document.getElementById('removeData').addEventListener('click', function() {
+            barChartData.datasets.splice(0, 1);
             window.myBar.update();
         });
+
     </script>
 </body>
 
